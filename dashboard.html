@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanment – Converter</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">Quanment</div>
+    <div class="nav-links">
+        <a class="active" id="navConverter" onclick="showConverter()">Converter</a>
+        <a id="navHistory" onclick="showHistory()">History</a>
+    </div>
+    <div class="nav-right">
+        <div class="nav-user" id="navUser">JD</div>
+        <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+</nav>
+
+<!-- HERO BANNER -->
+<div class="hero">Welcome To Quantity Measurement</div>
+
+<!-- ══════════════════════════════════
+     CONVERTER SECTION
+══════════════════════════════════ -->
+<div class="main" id="converterSection">
+
+    <!-- TYPE SELECTOR -->
+    <div class="section-label">Choose Type</div>
+    <div class="type-grid">
+        <div class="type-card active" onclick="setType('length', this)">
+            <span class="icon">📏</span>
+            <div class="label">Length</div>
+        </div>
+        <div class="type-card" onclick="setType('temperature', this)">
+            <span class="icon">🌡️</span>
+            <div class="label">Temperature</div>
+        </div>
+        <div class="type-card" onclick="setType('volume', this)">
+            <span class="icon">🧪</span>
+            <div class="label">Volume</div>
+        </div>
+        <div class="type-card" onclick="setType('weight', this)">
+            <span class="icon">⚖️</span>
+            <div class="label">Weight</div>
+        </div>
+    </div>
+
+    <!-- OPERATION SELECTOR -->
+    <div class="section-label">Choose Operation</div>
+    <div class="op-grid">
+        <div class="op-card active" onclick="setOperation('convert', this)" title="Convert">
+            <span class="op-icon">⇄</span>
+            <div class="op-label">Convert</div>
+        </div>
+        <div class="op-card" onclick="setOperation('add', this)" title="Addition">
+            <span class="op-icon">+</span>
+            <div class="op-label">Add</div>
+        </div>
+        <div class="op-card" onclick="setOperation('subtract', this)" title="Subtraction">
+            <span class="op-icon">−</span>
+            <div class="op-label">Subtract</div>
+        </div>
+        <div class="op-card" onclick="setOperation('multiply', this)" title="Multiplication">
+            <span class="op-icon">×</span>
+            <div class="op-label">Multiply</div>
+        </div>
+        <div class="op-card" onclick="setOperation('divide', this)" title="Division">
+            <span class="op-icon">÷</span>
+            <div class="op-label">Divide</div>
+        </div>
+    </div>
+
+    <!-- TEMPERATURE ARITHMETIC WARNING -->
+    <div class="temp-warning" id="tempWarning">
+        <span class="warn-icon">⚠️</span>
+        <div>
+            <strong>Arithmetic not available for Temperature</strong>
+            <p>Addition, subtraction, multiplication and division are not physically meaningful for temperature scales (°C, °F, K). Only conversion is supported.</p>
+        </div>
+    </div>
+
+    <!-- ── CONVERT PANEL ── -->
+    <div class="converter-panel" id="convertPanel">
+        <div class="converter-row">
+            <div class="field-group">
+                <div class="field-label">From</div>
+                <input class="number-input" type="number" id="fromVal" value="1" oninput="liveConvert()">
+                <select class="unit-select" id="fromUnit" onchange="liveConvert()"></select>
+            </div>
+            <button class="swap-btn" onclick="swapUnits()" title="Swap">⇄</button>
+            <div class="field-group">
+                <div class="field-label">To</div>
+                <input class="number-input result-input" type="number" id="toVal" placeholder="—" readonly>
+                <select class="unit-select" id="toUnit" onchange="liveConvert()"></select>
+            </div>
+        </div>
+        <button class="convert-btn" onclick="doConvert()">Convert →</button>
+        <div class="result-box" id="convertResultBox">
+            <div class="result-label">Result</div>
+            <div class="result-value" id="convertResultVal"></div>
+            <div class="result-desc" id="convertResultDesc"></div>
+        </div>
+    </div>
+
+    <!-- ── ARITHMETIC PANEL ── -->
+    <div class="converter-panel" id="arithmeticPanel" style="display:none;">
+
+        <!-- Same-unit arithmetic -->
+        <div class="arith-section">
+            <div class="arith-section-title" id="arithTitle">Add two lengths</div>
+
+            <div class="arith-row">
+                <!-- VALUE A -->
+                <div class="field-group arith-field">
+                    <div class="field-label">Value A</div>
+                    <input class="number-input" type="number" id="arithValA" value="1" oninput="liveArith()">
+                    <select class="unit-select" id="arithUnitA" onchange="liveArith()"></select>
+                </div>
+
+                <!-- OPERATOR BADGE -->
+                <div class="op-badge" id="opBadge">+</div>
+
+                <!-- VALUE B -->
+                <div class="field-group arith-field">
+                    <div class="field-label">Value B</div>
+                    <input class="number-input" type="number" id="arithValB" value="1" oninput="liveArith()">
+                    <select class="unit-select" id="arithUnitB" onchange="liveArith()"></select>
+                </div>
+
+                <!-- = -->
+                <div class="op-badge">=</div>
+
+                <!-- RESULT UNIT -->
+                <div class="field-group arith-field">
+                    <div class="field-label">Result in</div>
+                    <input class="number-input result-input" type="text" id="arithResult" placeholder="—" readonly>
+                    <select class="unit-select" id="arithUnitResult" onchange="liveArith()"></select>
+                </div>
+            </div>
+
+            <button class="convert-btn" onclick="doArith()">Calculate →</button>
+
+            <div class="result-box" id="arithResultBox">
+                <div class="result-label">Result</div>
+                <div class="result-value" id="arithResultVal"></div>
+                <div class="result-desc" id="arithResultDesc"></div>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.main -->
+
+<!-- ══════════════════════════════════
+     HISTORY SECTION
+══════════════════════════════════ -->
+<div class="history-panel" id="historySection">
+    <div class="history-header">
+        <div class="history-title">Conversion History</div>
+        <button class="clear-btn" onclick="clearHistory()">Clear All</button>
+    </div>
+    <div class="history-list" id="historyList"></div>
+</div>
+
+<script src="js/dashboard.js"></script>
+</body>
+</html>

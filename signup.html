@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanment – Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<div class="auth-container">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+        <div class="brand">
+            <div class="brand-icon">Q</div>
+            <span class="brand-name">Quanment</span>
+        </div>
+        <h1 class="tagline">Start converting<br><span class="accent">instantly.</span></h1>
+        <p class="sub">Create a free account and access all measurement tools in seconds.</p>
+        <div class="features">
+            <div class="feature-pill">📏 Length</div>
+            <div class="feature-pill">🌡️ Temperature</div>
+            <div class="feature-pill">🧪 Volume</div>
+            <div class="feature-pill">⚖️ Weight</div>
+            <div class="feature-pill">➕ Arithmetic</div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right">
+        <div class="auth-card">
+            <h2 class="card-title">Create account</h2>
+            <p class="card-sub">Join Quanment for free</p>
+
+            <div class="alert" id="signupAlert"></div>
+
+            <div class="field-row">
+                <div class="field-group">
+                    <label class="field-label">First Name</label>
+                    <input class="field-input" type="text" id="firstName" placeholder="John">
+                </div>
+                <div class="field-group">
+                    <label class="field-label">Last Name</label>
+                    <input class="field-input" type="text" id="lastName" placeholder="Doe">
+                </div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Email</label>
+                <input class="field-input" type="email" id="signupEmail" placeholder="you@example.com">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Password</label>
+                <div class="password-wrap">
+                    <input class="field-input" type="password" id="signupPassword" placeholder="Min. 6 characters">
+                    <button class="toggle-pw" onclick="togglePw('signupPassword', this)">👁</button>
+                </div>
+                <div class="strength-bar" id="strengthBar">
+                    <div class="strength-fill" id="strengthFill"></div>
+                </div>
+                <div class="strength-text" id="strengthText"></div>
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Confirm Password</label>
+                <div class="password-wrap">
+                    <input class="field-input" type="password" id="confirmPassword" placeholder="Repeat password">
+                    <button class="toggle-pw" onclick="togglePw('confirmPassword', this)">👁</button>
+                </div>
+            </div>
+
+            <div class="terms-row">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="agreeTerms"> I agree to the <a href="#">Terms & Conditions</a>
+                </label>
+            </div>
+
+            <button class="auth-btn" onclick="handleSignup()">Create Account</button>
+
+            <p class="switch-text">Already have an account? <a href="index.html">Sign in</a></p>
+        </div>
+    </div>
+
+</div>
+<script src="js/auth.js"></script>
+</body>
+</html>

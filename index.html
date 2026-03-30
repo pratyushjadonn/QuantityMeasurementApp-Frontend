@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanment – Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+<div class="auth-container">
+
+    <!-- LEFT PANEL -->
+    <div class="auth-left">
+        <div class="brand">
+            <div class="brand-icon">Q</div>
+            <span class="brand-name">Quanment</span>
+        </div>
+        <h1 class="tagline">Measure everything<br><span class="accent">effortlessly.</span></h1>
+        <p class="sub">Convert, add, subtract, multiply and divide across length, volume and more — all in one place.</p>
+        <div class="features">
+            <div class="feature-pill">📏 Length</div>
+            <div class="feature-pill">🌡️ Temperature</div>
+            <div class="feature-pill">🧪 Volume</div>
+            <div class="feature-pill">⚖️ Weight</div>
+            <div class="feature-pill">➕ Arithmetic</div>
+        </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="auth-right">
+        <div class="auth-card">
+            <h2 class="card-title">Welcome back</h2>
+            <p class="card-sub">Sign in to your account</p>
+
+            <div class="alert" id="loginAlert"></div>
+
+            <div class="field-group">
+                <label class="field-label">Email</label>
+                <input class="field-input" type="email" id="loginEmail" placeholder="you@example.com">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Password</label>
+                <div class="password-wrap">
+                    <input class="field-input" type="password" id="loginPassword" placeholder="••••••••">
+                    <button class="toggle-pw" onclick="togglePw('loginPassword', this)">👁</button>
+                </div>
+            </div>
+
+            <div class="remember-row">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="remember"> Remember me
+                </label>
+                <a class="forgot-link" href="#">Forgot password?</a>
+            </div>
+
+            <button class="auth-btn" onclick="handleLogin()">Sign In</button>
+
+            <p class="switch-text">Don't have an account? <a href="signup.html">Sign up</a></p>
+        </div>
+    </div>
+
+</div>
+<script src="js/auth.js"></script>
+</body>
+</html>
